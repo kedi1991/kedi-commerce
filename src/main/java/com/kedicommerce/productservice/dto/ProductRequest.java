@@ -1,4 +1,4 @@
-package com.kedicommerce.productservice.controller.dto;
+package com.kedicommerce.productservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +12,9 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductRequest {
+    /**
+     * Used to represent the Product object that wll be created
+     */
 
     private String name;
     private String description;
