@@ -1,5 +1,6 @@
 package com.kedicommerce.productservice.controller;
 
+import com.kedicommerce.productservice.controller.dto.ProductRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
