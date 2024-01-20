@@ -37,9 +37,11 @@ public class ProductService {
 
         /**map the Products into the ProductResponse class.
          a stream is a list of elements that can be processed sequentially
-         of in parallel, apply a mapping function to each element
+         of in parallel, apply a mapping function to each element.
+
+         Collect the results of the mapping into a list
          */
-        products.stream().map(this::mapToProductResponse);
+        return products.stream().map(this::mapToProductResponse).toList();
     }
 
     private ProductResponse mapToProductResponse(Product product) {
