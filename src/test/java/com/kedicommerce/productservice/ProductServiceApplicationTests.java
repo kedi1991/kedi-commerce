@@ -2,6 +2,8 @@ package com.kedicommerce.productservice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kedicommerce.productservice.dto.ProductRequest;
+import com.kedicommerce.productservice.repository.ProductRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -36,6 +38,9 @@ class ProductServiceApplicationTests {
 	private MockMvc mockMvc;
 
 	@Autowired
+	ProductRepository productRepository;
+
+	@Autowired
 	private ObjectMapper objectMapper;
 	@DynamicPropertySource
 	static void setProperties(DynamicPropertyRegistry dynamicPropertyRegistry){
@@ -46,7 +51,6 @@ class ProductServiceApplicationTests {
 	void shouldCreateProduct() throws Exception {
 
 		ProductRequest productRequest = getProductRequest();
-
 		/**
 		 * content method takes a string, so we have to convert the product request to a string
 		 */
@@ -56,6 +60,11 @@ class ProductServiceApplicationTests {
 				.content(productRequestString)
 
 		).andExpect(status().isCreated());
+
+		/**
+		 * now check if the data has been entered into the dB
+		 */
+		Assertions.assertEquals(1, productRepository.findAll().size());
 	}
 
 	private ProductRequest getProductRequest() {
